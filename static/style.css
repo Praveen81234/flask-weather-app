@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,195 +7,273 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-    background: linear-gradient(to bottom, #1e3c72 0%, #2a5298 50%, #7e8ba3 100%);
+    font-family: 'Inter', sans-serif;
     min-height: 100vh;
-    color: #fff;
-}
-
-.navbar {
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    padding: 20px 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-}
-
-.hero {
-    max-width: 600px;
-    margin: 60px auto;
-    padding: 0 20px;
-}
-
-.search-container {
-    margin-bottom: 40px;
-}
-
-.search-container form {
-    display: flex;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 8px;
-    border-radius: 50px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-}
-
-.search-container input {
-    flex: 1;
-    border: none;
-    background: transparent;
-    padding: 15px 20px;
-    font-size: 16px;
-    color: #333;
-    outline: none;
-}
-
-.search-container input::placeholder {
-    color: #999;
-}
-
-.search-container button {
-    background: #1e3c72;
-    border: none;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 20px;
-    transition: all 0.3s;
+    background-image: url('https://images.unsplash.com/photo-1534088568595-a066f410bcda?w=1600&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    overflow: hidden;
 }
 
-.search-container button:hover {
-    background: #2a5298;
-    transform: scale(1.05);
+.bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(30, 60, 120, 0.55) 0%,
+        rgba(10, 20, 60, 0.65) 100%
+    );
+    z-index: 0;
 }
 
-.error-message {
+.app {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* ── Search ── */
+.search-wrap {
+    width: 100%;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    padding: 6px 6px 6px 18px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
+    gap: 10px;
+}
+
+.search-icon {
+    font-size: 16px;
+    opacity: 0.8;
+}
+
+.search-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    font-size: 15px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+}
+
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-box button {
+    background: white;
+    color: #1a3a6b;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.search-box button:hover {
+    background: #e8f0ff;
+    transform: scale(1.03);
+}
+
+/* ── Error ── */
+.error-msg {
     background: rgba(255, 59, 48, 0.2);
     border: 1px solid rgba(255, 59, 48, 0.4);
-    color: #fff;
-    padding: 15px 20px;
-    border-radius: 15px;
-    margin-bottom: 20px;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 16px;
+    font-size: 14px;
     text-align: center;
+    backdrop-filter: blur(10px);
 }
 
-.weather-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(20px);
-    border-radius: 30px;
-    padding: 40px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+/* ── Card ── */
+.card {
+    background: rgba(10, 20, 55, 0.5);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 32px;
+    padding: 32px 28px;
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+/* ── Card Top ── */
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 28px;
 }
 
 .location {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 18px;
-    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 500;
     opacity: 0.9;
+    letter-spacing: 0.3px;
 }
 
 .datetime {
-    text-align: center;
-    margin-bottom: 25px;
+    text-align: right;
 }
 
-.date {
-    font-size: 16px;
-    opacity: 0.8;
-    margin-bottom: 5px;
+.date-text {
+    font-size: 12px;
+    opacity: 0.65;
+    margin-bottom: 3px;
+    font-weight: 400;
 }
 
-.time {
-    font-size: 32px;
-    font-weight: 600;
+.time-text {
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
-.current-weather {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.main-temp {
+/* ── Card Middle ── */
+.card-middle {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-.main-temp img {
-    width: 120px;
-    height: 120px;
-    filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
-    background: transparent;
+.weather-icon {
+    font-size: 90px;
+    line-height: 1;
+    filter: drop-shadow(0 8px 20px rgba(0,0,0,0.3));
 }
 
-.weather-emoji {
+.temp-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.temp {
     font-size: 100px;
+    font-weight: 200;
     line-height: 1;
+    letter-spacing: -4px;
 }
 
-.temp-value {
-    font-size: 80px;
-    font-weight: 300;
-    line-height: 1;
-}
-
-.condition {
-    font-size: 24px;
-    margin-top: 10px;
-    opacity: 0.9;
-    font-weight: 300;
-}
-
-.weather-details {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding-top: 30px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.detail-item {
-    text-align: center;
-}
-
-.detail-label {
+.unit {
     font-size: 13px;
-    opacity: 0.7;
-    margin-bottom: 8px;
+    opacity: 0.55;
+    font-weight: 400;
+    letter-spacing: 1px;
     text-transform: uppercase;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+/* ── Condition ── */
+.condition-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 400;
+    opacity: 0.85;
+    margin-bottom: 28px;
     letter-spacing: 0.5px;
 }
 
-.detail-value {
-    font-size: 24px;
-    font-weight: 600;
+/* ── Divider ── */
+.divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin-bottom: 24px;
 }
 
-@media (max-width: 600px) {
-    .weather-details {
-        grid-template-columns: 1fr;
-        gap: 15px;
-    }
-    
-    .temp-value {
-        font-size: 60px;
-    }
-    
-    .main-temp img {
-        width: 100px;
-        height: 100px;
-    }
+/* ── Stats ── */
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.stat {
+    flex: 1;
+    text-align: center;
+}
+
+.stat-icon {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.stat-value {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    letter-spacing: -0.5px;
+}
+
+.unit-small {
+    font-size: 13px;
+    font-weight: 400;
+    opacity: 0.7;
+    margin-left: 2px;
+}
+
+.stat-label {
+    font-size: 11px;
+    opacity: 0.55;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ── Default Card ── */
+.default-card {
+    text-align: center;
+    padding: 50px 28px;
+}
+
+.default-emoji {
+    font-size: 70px;
+    margin-bottom: 16px;
+}
+
+.default-title {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.default-sub {
+    font-size: 15px;
+    opacity: 0.6;
+    font-weight: 300;
 }

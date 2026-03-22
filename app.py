@@ -13,7 +13,6 @@ def home():
 
     if request.method == 'POST':
         city = request.form['city']
-
         url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
 
         try:
@@ -21,15 +20,11 @@ def home():
             data = response.json()
 
             if data.get("cod") == 200:
-                # Get weather icon emoji
                 icon_code = data["weather"][0]["icon"]
                 weather_id = data["weather"][0]["id"]
-                
-                # Map weather conditions to emojis
+
                 if weather_id < 300:
                     emoji = "⛈️"
-                elif weather_id < 400:
-                    emoji = "🌧️"
                 elif weather_id < 600:
                     emoji = "🌧️"
                 elif weather_id < 700:
@@ -40,30 +35,26 @@ def home():
                     emoji = "☀️" if "d" in icon_code else "🌙"
                 else:
                     emoji = "☁️"
-                
-                # Get city's local time using timezone offset
-                timezone_offset = data["timezone"]  # offset in seconds
-                utc_now = datetime.utcnow()
-                city_time = utc_now + timedelta(seconds=timezone_offset)
-                time_str = city_time.strftime("%I:%M %p")
-                date_str = city_time.strftime("%A, %B %d")
-                
+
+                timezone_offset = data["timezone"]
+                city_time = datetime.utcnow() + timedelta(seconds=timezone_offset)
+
                 weather = {
                     "city": data["name"],
+                    "country": data["sys"]["country"],
                     "temp": round(data["main"]["temp"]),
-                    "desc": data["weather"][0]["description"],
-                    "icon": data["weather"][0]["icon"],
+                    "desc": data["weather"][0]["description"].title(),
                     "emoji": emoji,
                     "humidity": data["main"]["humidity"],
                     "wind": round(data["wind"]["speed"] * 3.6),
                     "feels_like": round(data["main"]["feels_like"]),
-                    "time": time_str,
-                    "date": date_str
+                    "time": city_time.strftime("%I:%M %p"),
+                    "date": city_time.strftime("%A, %B %d")
                 }
             else:
                 error = "City not found. Please try again."
         except Exception as e:
-            error = f"Error: {str(e)}"
+            error = f"Something went wrong. Try again."
 
     return render_template("index.html", weather=weather, error=error)
 

@@ -1,61 +1,88 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Weather Forecast</title>
+    <title>WeatherNow</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@200;300;400;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="logo">WeatherNow</div>
-    </nav>
-    
-    <div class="hero">
-        <div class="search-container">
-            <form method="POST">
+
+    <div class="bg-overlay"></div>
+
+    <div class="app">
+
+        <!-- Search Bar -->
+        <div class="search-wrap">
+            <form method="POST" class="search-box">
+                <span class="search-icon">🔍</span>
                 <input type="text" name="city" placeholder="Search for a city..." required autocomplete="off">
-                <button type="submit">🔍</button>
+                <button type="submit">Go</button>
             </form>
         </div>
 
         {% if error %}
-        <div class="error-message">{{ error }}</div>
+        <div class="error-msg">⚠️ {{ error }}</div>
         {% endif %}
 
         {% if weather %}
-        <div class="weather-card">
-            <div class="location">
-                📍 {{ weather.city }}
-            </div>
-            
-            <div class="datetime">
-                <div class="date">{{ weather.date }}</div>
-                <div class="time">{{ weather.time }}</div>
-            </div>
-            
-            <div class="current-weather">
-                <div class="main-temp">
-                    <div class="weather-emoji">{{ weather.emoji }}</div>
-                    <div class="temp-value">{{ weather.temp }}°</div>
+        <!-- Weather Card -->
+        <div class="card">
+
+            <div class="card-top">
+                <div class="location">📍 {{ weather.city }}, {{ weather.country }}</div>
+                <div class="datetime">
+                    <div class="date-text">{{ weather.date }}</div>
+                    <div class="time-text">{{ weather.time }}</div>
                 </div>
-                <div class="condition">{{ weather.desc|title }}</div>
             </div>
 
-            <div class="weather-details">
-                <div class="detail-item">
-                    <div class="detail-label">Humidity</div>
-                    <div class="detail-value">{{ weather.humidity }}%</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Wind Speed</div>
-                    <div class="detail-value">{{ weather.wind }} km/h</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Feels Like</div>
-                    <div class="detail-value">{{ weather.feels_like }}°</div>
+            <div class="card-middle">
+                <div class="weather-icon">{{ weather.emoji }}</div>
+                <div class="temp-block">
+                    <div class="temp">{{ weather.temp }}°</div>
+                    <div class="unit">Celsius</div>
                 </div>
             </div>
+
+            <div class="condition-text">{{ weather.desc }}</div>
+
+            <div class="divider"></div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-icon">💧</div>
+                    <div class="stat-value">{{ weather.humidity }}%</div>
+                    <div class="stat-label">Humidity</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <div class="stat-icon">💨</div>
+                    <div class="stat-value">{{ weather.wind }}<span class="unit-small">km/h</span></div>
+                    <div class="stat-label">Wind</div>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat">
+                    <div class="stat-icon">🌡️</div>
+                    <div class="stat-value">{{ weather.feels_like }}°</div>
+                    <div class="stat-label">Feels Like</div>
+                </div>
+            </div>
+
         </div>
+
+        {% else %}
+
+        <!-- Default state -->
+        <div class="card default-card">
+            <div class="default-emoji">🌤️</div>
+            <div class="default-title">WeatherNow</div>
+            <div class="default-sub">Search any city to get real-time weather</div>
+        </div>
+
         {% endif %}
+
     </div>
+
 </body>
 </html>
